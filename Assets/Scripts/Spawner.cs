@@ -7,10 +7,12 @@ public class Spawner : MonoBehaviour
     [SerializeField] private float _delay = 2f;
 
     private SpawnPoint[] _spawnPoints;
+    private WaitForSeconds _waitTime;
 
     private void Awake()
     {
         _spawnPoints = GetComponentsInChildren<SpawnPoint>();
+        _waitTime = new WaitForSeconds(_delay);
     }
 
     private void OnEnable()
@@ -32,7 +34,7 @@ public class Spawner : MonoBehaviour
 
             spawnedEnemy.transform.forward = spawnPoint.MoveDirection;
 
-            yield return new WaitForSeconds(_delay);
+            yield return _waitTime;
         }
     }
 
